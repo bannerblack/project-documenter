@@ -1,42 +1,15 @@
-# sv
+# Project Documenter
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+## Overview
 
-## Creating a project
+This project is a small tool to help you find your projects.
 
-If you're seeing this, you've probably already done this step. Congrats!
+## Stack
 
-```sh
-# create a new project
-npx sv create my-app
-```
+- SvelteKit
+- Tauri/Rust
 
-To recreate this project with the same configuration:
-
-```sh
-# recreate this project
-npx sv create --template minimal --types ts --add prettier eslint mdsvex mcp="ide:vscode+setup:remote" sveltekit-adapter="adapter:static" tailwindcss="plugins:none" --install npm .
-```
-
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```sh
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
-
-## Building
-
-To create a production version of your app:
-
-```sh
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+<!-- For Project Documenter -->
+<!-- Title: Project Documenter -->
+<!-- Description: A tool to document and manage your projects. -->
+<!-- Github: https://github.com/bannerblack/project-documenter -->

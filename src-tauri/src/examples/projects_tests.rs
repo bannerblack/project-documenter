@@ -1,10 +1,10 @@
-use app_lib::projects::get_folder_subdirs;
+use app_lib::projects::scan_project_folder;
 
 fn test_get_folder_subdirs(path: &str) {
-    let subdirs = get_folder_subdirs(path);
-    println!("Subdirectories: {:?}", subdirs);
+    let projects = scan_project_folder(path);
+    println!("Projects: {:?}", projects);
 }
 
 fn main() {
-    test_get_folder_subdirs("/Users/bzar/Documents/Production Projects");
+    test_get_folder_subdirs(r"C:\Users\kotsu\Desktop\Production");
 }

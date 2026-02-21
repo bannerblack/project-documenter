@@ -3,7 +3,7 @@
 	import favicon from '$lib/assets/favicon.svg';
 	import { darkMode } from '$lib/stores/theme';
 
-	let { children } = $props();
+	let { children, data } = $props();
 
 	$effect.pre(() => {
 		document.body.classList.add('dark');
