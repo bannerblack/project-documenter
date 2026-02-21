@@ -7,7 +7,7 @@ This project is a small tool to help you find your projects.
 ## Features
 
 - Automatically find projects in specified directories by their ReadMe files.
-- Added attribute comments give more context to the project list.
+- Added ReadMe attribute comments give more context to the project list.
   - `<!-- Title: Title of Project -->`
   - `<!-- Description: Short description of the project -->`
   - `<!-- Github: Link to GitHub repository -->`
@@ -22,6 +22,9 @@ This project is a small tool to help you find your projects.
 
 - [ ] Handle multiple projects on backend
 - [ ] Folder shortcut integrations (maybe tabbed)
+- [ ] Build out settings
+- [ ] Add more project attributes (e.g. tags, last updated, etc.)
+- [ ] Screenshots
 
 ## Stack
 
