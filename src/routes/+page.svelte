@@ -18,7 +18,7 @@
 	// ---------------------------------------------
 </script>
 
-<!-- <pre>{JSON.stringify(data.projects, null, 2)}</pre> -->
+<pre>{JSON.stringify(data.projects, null, 2)}</pre>
 <pre>{JSON.stringify(data.store, null, 2)}</pre>
 
 {#if projects.length === 0}

@@ -2,6 +2,7 @@
 	import Button from '$lib/components/ui/button/button.svelte';
 	import * as Card from '$lib/components/ui/card/index';
 	import * as ButtonGroup from '$lib/components/ui/button-group/index';
+	import Badge from '$lib/components/ui/badge/badge.svelte';
 
 	import ReadmeContent from '@blocks/readme-content.svelte';
 
@@ -62,6 +63,13 @@
 	<Card.Header class="flex flex-col justify-between gap-4">
 		<Card.Title class="text-xl font-bold">{project.name}</Card.Title>
 		<Card.Description>{project.description}</Card.Description>
+		{#if project.tags.length > 0}
+			<Card.Description class="flex flex-wrap flex-row gap-2 pt-2">
+				{#each project.tags as tag}
+					<Badge variant="outline">{tag}</Badge>
+				{/each}
+			</Card.Description>
+		{/if}
 	</Card.Header>
 
 	<!-- Content -->

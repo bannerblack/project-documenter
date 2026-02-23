@@ -37,3 +37,4 @@ This project is a small tool to help you find your projects.
 <!-- Title: Project Documenter -->
 <!-- Description: A tool to document and manage your projects. -->
 <!-- Github: https://github.com/bannerblack/project-documenter -->
+<!-- Tags: Active, Project, Personal, Public -->
