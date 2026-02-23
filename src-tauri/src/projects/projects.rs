@@ -1,12 +1,13 @@
-use std::path::PathBuf;
-
 #[derive(serde::Serialize, serde::Deserialize, Debug)]
 pub struct Project {
     pub name: String,
+    pub parent: String,
     pub root_folder_path: String,
     pub description: Option<String>,
     pub github_link: Option<String>,
     pub read_me_link: Option<String>,
+    pub tags: Vec<String>,
+    pub priority: Option<u32>,
 }
 
 /// Get all subdirectories of a folder and return their paths as strings
@@ -33,6 +34,8 @@ struct ReadMeParse {
     description: Option<String>,
     github_link: Option<String>,
     read_me_link: Option<String>,
+    tags: Vec<String>,
+    priority: Option<u32>,
 }
 
 /// Parse the project root readme and return the content and the path to the readme if it exists
@@ -63,6 +66,8 @@ fn find_config_in_readme(_path: &str) -> ReadMeParse {
         description: None,
         github_link: None,
         read_me_link,
+        tags: Vec::new(),
+        priority: None,
     };
 
     for line in content.unwrap_or_default().lines() {
@@ -83,6 +88,14 @@ fn find_config_in_readme(_path: &str) -> ReadMeParse {
                 result.description = Some(parse_value("description:".len()));
             } else if inner_lower.starts_with("github:") {
                 result.github_link = Some(parse_value("github:".len()));
+            } else if inner_lower.starts_with("tags:") {
+                result.tags = parse_value("tags:".len())
+                    .split(',')
+                    .map(|t| t.trim().to_string())
+                    .filter(|t| !t.is_empty())
+                    .collect();
+            } else if inner_lower.starts_with("priority:") {
+                result.priority = parse_value("priority:".len()).parse::<u32>().ok();
             }
         }
     }
@@ -91,21 +104,27 @@ fn find_config_in_readme(_path: &str) -> ReadMeParse {
 }
 
 #[tauri::command]
-/// Scan a folder for subdirectories and return a list of projects with info from their readme files
-pub fn scan_project_folder(_path: &str) -> Vec<Project> {
-    let subdirs = get_folder_subdirs(_path);
+/// Scan multiple folders for subdirectories and return a flat list of projects with info from their readme files
+pub fn scan_project_folders(paths: Vec<&str>) -> Vec<Project> {
     let mut projects = Vec::new();
 
-    for subdir in subdirs {
-        let readme_info = find_config_in_readme(&subdir);
-        if let Some(title) = readme_info.title {
-            projects.push(Project {
-                name: title.clone(),
-                root_folder_path: subdir,
-                description: readme_info.description,
-                github_link: readme_info.github_link,
-                read_me_link: readme_info.read_me_link,
-            });
+    for parent_path in paths {
+        let subdirs = get_folder_subdirs(parent_path);
+
+        for subdir in subdirs {
+            let readme_info = find_config_in_readme(&subdir);
+            if let Some(title) = readme_info.title {
+                projects.push(Project {
+                    name: title.clone(),
+                    parent: parent_path.to_string(),
+                    root_folder_path: subdir,
+                    description: readme_info.description,
+                    github_link: readme_info.github_link,
+                    read_me_link: readme_info.read_me_link,
+                    tags: readme_info.tags,
+                    priority: readme_info.priority,
+                });
+            }
         }
     }
 

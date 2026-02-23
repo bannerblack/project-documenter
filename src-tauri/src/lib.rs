@@ -34,7 +34,7 @@ pub fn run() {
         .invoke_handler(tauri::generate_handler![
             files::get_readme_content,
             open_in_vscode,
-            projects::scan_project_folder
+            projects::scan_project_folders
         ])
         .setup(|app| {
             if cfg!(debug_assertions) {

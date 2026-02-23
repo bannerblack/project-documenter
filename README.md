@@ -11,6 +11,8 @@ This project is a small tool to help you find your projects.
   - `<!-- Title: Title of Project -->`
   - `<!-- Description: Short description of the project -->`
   - `<!-- Github: Link to GitHub repository -->`
+  - `<!-- Tags: tag1, tag2, tags3 -->`
+  - `<!-- Priority: 1 -->`
 - Display ReadMe content directly in the app for quick reference.
 
 ## Settings
